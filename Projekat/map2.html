@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map 2</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; }
+    </style>
+</head>
+<body>
+<h1>Shapefile Eksploatacija</h1>
+<div id="map"></div>
+
+<button onclick="redirectToMap1()">Mapa 1</button>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([45.56, 20.44], 12); // Set the initial map view
+
+    // Add a tile layer to the map
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Your shapefile layer served by GeoServer
+    var shapefileLayer = L.tileLayer.wms('http://localhost:8080/geoserver/Projekat/wms?', {
+        layers: 'Projekat:Eksploatacija',
+        format: 'image/png',
+        transparent: true,
+        version: '1.1.0',
+        attribution: 'Your attribution'
+    }).addTo(map);
+
+    function redirectToMap1() {
+        window.location.href = 'map1.html';
+    }
+</script>
+
+</body>
+</html>
+
+
+
